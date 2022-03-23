@@ -3,6 +3,8 @@ info:
   title: backend
   version: '1.0'
   summary: this API design documentation for iTravelo project
+  contact:
+    name: mahmoud sakr
 servers:
   - url: 'http://localhost:8080'
 paths:
@@ -16,7 +18,8 @@ paths:
         description: Id of an existing user.
     get:
       summary: Get User Info by User ID
-      tags: []
+      tags:
+        - Users
       responses:
         '200':
           description: User Found
@@ -90,6 +93,8 @@ paths:
                   lastName: Baker
                   dateOfBirth: '1985-10-02'
         description: Patch user properties to update.
+      tags:
+        - Users
   /user:
     post:
       summary: Create New User
@@ -144,6 +149,8 @@ paths:
                   dateOfBirth: '1996-08-24'
         description: Post the necessary fields for the API to create a new user.
       description: Create a new user.
+      tags:
+        - Users
   /routes:
     get:
       summary: Get list of routes
@@ -201,6 +208,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Route'
+      tags:
+        - Routes
     delete:
       summary: Delete route
       operationId: delete-routes-routeId
@@ -210,6 +219,40 @@ paths:
       tags:
         - Routes
       description: Deletes a route by id
+  /workorders:
+    get:
+      summary: Get list of work orders
+      tags:
+        - WorkOrders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrder'
+      operationId: get-workorders
+      description: Retrieves list of work orders
+    post:
+      summary: Create work order
+      operationId: post-workorders
+      responses:
+        '200':
+          description: OK
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrder'
+      tags:
+        - WorkOrders
+      description: Creates a work order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkOrder'
 components:
   schemas:
     User:
