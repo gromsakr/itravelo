@@ -5,6 +5,7 @@ info:
   summary: this API design documentation for iTravelo project
   contact:
     name: mahmoud sakr
+  description: this API design documentation for iTravelo project
 servers:
   - url: 'http://localhost:8080'
 paths:
@@ -166,7 +167,7 @@ paths:
       operationId: get-routes
       tags:
         - Routes
-      description: ''
+      description: Retrieves list of routes
     post:
       summary: Create route
       operationId: post-routes
@@ -189,7 +190,13 @@ paths:
       summary: Get a route
       tags:
         - Routes
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
       operationId: get-routes-routeId
       description: Retrieves a routed by id
     put:
@@ -214,8 +221,8 @@ paths:
       summary: Delete route
       operationId: delete-routes-routeId
       responses:
-        '200':
-          description: OK
+        '204':
+          description: No Content
       tags:
         - Routes
       description: Deletes a route by id
@@ -253,6 +260,49 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/WorkOrder'
+  '/workorders/{workOrderId}':
+    parameters:
+      - $ref: '#/components/parameters/workOrderId'
+    get:
+      summary: Get a work order by id
+      tags:
+        - WorkOrders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrder'
+      operationId: get-workorders-workOrderId
+      description: Get a work order by id
+    put:
+      summary: Update a work order
+      operationId: put-workorders-workOrderId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkOrder'
+      tags:
+        - WorkOrders
+      description: Updates a work order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkOrder'
+    delete:
+      summary: Delete work order
+      operationId: delete-workorders-workOrderId
+      responses:
+        '204':
+          description: No Content
+      description: Delete a work order by id
+      tags:
+        - WorkOrders
 components:
   schemas:
     User:
@@ -430,6 +480,13 @@ components:
       schema:
         type: number
       description: id of object
+    workOrderId:
+      name: workOrderId
+      in: path
+      required: true
+      schema:
+        type: number
+      description: work order Id
 tags:
   - name: Routes
   - name: WorkOrders
